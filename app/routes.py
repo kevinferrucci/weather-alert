@@ -43,7 +43,7 @@ def register_routes(app):
                     logging.warning(f"No zone ID(s) returned for coordinates: ({lat}, {lng})")
                     return redirect(url_for('home'))
 
-                create_user(first_name, email, lat, lng, ["PKZ671"])
+                create_user(first_name, email, lat, lng, zone_ids)
                 logging.info(f"Created new user: {email} with zone id(s): {zone_ids}")
             except requests.RequestException as e:
                 logging.error(f"Error fetching zones: {e}")
