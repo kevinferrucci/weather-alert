@@ -254,4 +254,4 @@ async def test_send_messages_to_queue_calls_send_messages(mock_servicebus):
 - [LinkedIn](https://www.linkedin.com/in/kevin-ferrucci/ "LinkedIn")
 
 ## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
