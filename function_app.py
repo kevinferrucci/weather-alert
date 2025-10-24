@@ -1,0 +1,1 @@
+from azfunc.function_app import app

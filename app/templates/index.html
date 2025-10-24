@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block content %}
+
+<!-- Title -->
+<section id="title" class="hero-section">
+    <div class="container col-xxl-8 px-4 pt-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 pt-5">
+            <div class="col-lg-6 ps-0 ms-0">
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Stay safe, stay informed.</h1>
+                <h2 class="h4 fw-normal text-body-secondary mb-3">
+                    Sign up to receive weather alerts issued by the<br>
+                    National Weather Service in real time.
+                </h2>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="#register" class="btn btn-outline-light btn-lg px-4 me-md-2">
+                        Register Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+    <div class="container mt-5" id="hanging-icons">
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="col d-flex align-items-start">
+                <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="bi bi-envelope"></i>
+                </div>
+                <div>
+                    <h3 class="fs-2 text-body-emphasis">1. Enter Email</h3>
+                    <p>Sign up with your name and<br> email address.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="bi bi-pin-map"></i>
+                </div>
+                <div>
+                    <h3 class="fs-2 text-body-emphasis">2. Share location</h3>
+                    <p>Let us detect your coordinates.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="bi bi-chat-right-text"></i>
+                </div>
+                <div>
+                    <h3 class="fs-2 text-body-emphasis">3. Get alerts</h3>
+                    <p>Receive urgent weather updates in real time from the NWS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="register" class="py-5">
+    <div class="container">
+        <div class="row align-items-top">
+
+            <!-- Left: Sample preview -->
+            <div class="col-md-6 mb-4 mb-md-0 text-center">
+                <h2 class="mb-4">Here’s what our alerts look like</h2>
+                <img src="./static/assets/images/email_example.png"
+                     alt="Alert sample"
+                     class="img-fluid shadow rounded">
+            </div>
+
+
+            <!-- Right: Signup form -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+
+                    <div class="card-header py-3">
+                        <h2 class="text-center my-0 fw-normal">Register for Alerts</h2>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form method="POST" action="{{ url_for('register_user') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.first_name.label(class="form-label") }}
+                                {{ form.first_name(class="form-control") }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.email.label(class="form-label") }}
+                                {{ form.email(class="form-control") }}
+                            </div>
+
+                            <!-- Location (hidden) fields (readonly, filled by JS) -->
+                            {{ form.lat(id="lat") }}
+                            {{ form.lng(id="lng") }}
+
+                            <!-- Button to trigger geolocation -->
+                            <button type="button" id="get-location-btn" class="btn btn-outline-dark mb-3"
+                                    onclick="getLocation()">
+                                Get My Location
+                            </button>
+                            <div class="form-check mb-3">
+                                {{ form.consent.label(class="form-check-label") }}
+                                {{ form.consent(class="form-check-input") }}
+                            </div>
+                            {{ form.submit(class="btn btn-dark w-100 btn-lg") }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function getLocation() {
+        const btn = document.getElementById("get-location-btn");
+        btn.innerText = "Getting location...";
+        btn.disabled = true; // prevent spamming
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("lng").value = position.coords.longitude;
+
+        const btn = document.getElementById("get-location-btn");
+        btn.classList.remove("btn-outline-dark");
+        btn.classList.add("btn-success");
+        btn.innerText = "Location Set ✅";
+    }
+
+    function showError(error) {
+        const btn = document.getElementById("get-location-btn");
+        btn.classList.remove("btn-outline-dark");
+        btn.classList.add("btn-danger");
+
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                btn.innerText = "Permission Denied ❌";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                btn.innerText = "Location Unavailable ❌";
+                break;
+            case error.TIMEOUT:
+                btn.innerText = "Request Timeout ❌";
+                break;
+            default:
+                btn.innerText = "Error Getting Location ❌";
+        }
+        btn.disabled = false;
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+# Python environments
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Git and metadata
+.git*
+.vscode/
+.idea/
+*.log
+
+# Tests (not needed in deployment)
+tests/
+TestResults/
+
+# Local settings (don’t deploy secrets)
+local.settings.json
+*.secrets
+secrets/
+appsettings.json
+
+# Build artifacts
+dist/
+build/
+
+# Azurite local storage
+__blobstorage__
+__queuestorage__
+__azurite_db*__.json

@@ -1,0 +1,40 @@
+# Python Environments
+.venv/
+.env
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+TestResults/
+
+# Local settings & secrets
+local.settings.json
+*.secrets
+secrets/
+appsettings.json
+
+# Logs
+*.log
+
+# Azurite artifacts
+__blobstorage__
+__queuestorage__
+__azurite_db*__.json
+
+# Build / dist
+dist/
+build/
+
+# VS Code / IDEs
+.vscode/
+.idea/
