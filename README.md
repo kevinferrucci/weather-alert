@@ -1,31 +1,26 @@
-<h1> 🌩 Weather Alert App </h1>
-
+# 🌩 Weather Alert App
 Weather Alert is a full-stack Flask application that delivers real-time severe weather alerts from the National Weather Service (NWS) directly to registered users’ inboxes.
 The project demonstrates production-ready cloud architecture by integrating Azure Cosmos DB, Azure Service Bus, and Azure Communication Services (email) while maintaining a clean Flask web interface.
 
-<h2>🚀 Features</h2>
-<ul>
-    <li>Register with your email & location (auto-fetched from browser geolocation).</li>
-    <li>Automatic lookup of your NWS forecast zone ID.</li>
-    <li>Fetches active alerts from the NWS API every 2 minutes.</li>
-    <li>Uses Azure Cosmos DB to store users, zone subscriptions, and sent alerts.</li>
-    <li>Uses Azure Service Bus to queue messages for scalability.</li>
-    <li>Sends email notifications via Azure Communication Services (Email API).</li>
-    <li>Includes unit tests with both hand-rolled fakes and unittest.mock for real-world testing practices.</li>
-</ul>
+## 🚀 Features
+- Register with your email & location (auto-fetched from browser geolocation).
+- Automatic lookup of your NWS forecast zone ID.
+- Fetches active alerts from the NWS API every 2 minutes.
+- Uses Azure Cosmos DB to store users, zone subscriptions, and sent alerts.
+- Uses Azure Service Bus to queue messages for scalability.
+- Sends email notifications via Azure Communication Services (Email API).
+- Includes unit tests with both hand-rolled fakes and unittest.mock for real-world testing practices.
 
-<h2>🛠 Tech Stack</h2>
-<ul>
-    <li><b>Backend:</b> Flask (Python)</li>
-    <li><b>Frontend:</b> Bootstrap 5, HTML, CSS</li>
-    <li><b>Database:</b> Azure Cosmos DB (NoSQL)</li>
-    <li><b>Messaging Queue:</b> Azure Service Bus (async)</li>
-    <li><b>Email Service:</b> Azure Communication Services (Email API)</li>
-    <li><b>Testing:</b> Pytest, unittest.mock, hand-built fakes</li>
-    <li><b>Deployment:</b> Azure (Function Apps + Web App)</li>
-</ul>
+## 🛠 Tech Stack
+- **Backend:** Flask (Python)
+- **Frontend:** Bootstrap 5, HTML, CSS
+- **Database:** Azure Cosmos DB (NoSQL)
+- **Messaging Queue:** Azure Service Bus (async)
+- **Email Service:** Azure Communication Services (Email API)
+- **Testing:** Pytest, unittest.mock, hand-built fakes
+- **Deployment:** Azure (Function Apps + Web App)
 
-<h2>📂 Project Structure</h2>
+## 📂 Project Structure
 ```
 weather-alert/
 │
@@ -75,32 +70,42 @@ weather-alert/
 └── README.md
 ```
 
-<h2>⚡️ Quick Start</h2>
+## ⚡️ Quick Start
+1. **Clone the repo**
+```
+git clone https://github.com/<your-username>/weather-alert.git
+cd weather-alert
+```
 
-<ol>
-<li><strong>Clone the repo</strong></li>
-<pre><code>git clone https://github.com/<your-username>/weather-alert.git
-cd weather-alert</code></pre>
-
-<li><strong>Create virtual environment</strong></li>
-<pre><code>python -m venv .venv
+2. **Create virtual environment**
+```
+python -m venv .venv
 source .venv/bin/activate   # Mac/Linux
-.venv\Scripts\activate      # Windows</code></pre>
+.venv\Scripts\activate      # Windows
+```
 
-<li><strong>Install dependencies</strong></li>
-<pre><code>pip install -r requirements.txt</code></pre>
+3. **Install dependencies**
+```
+pip install -r requirements.txt
+```
 
-<li><strong>Set up environment variables</strong></li>
+4. **Set up environment variables**
+
 Create a .env file in the project root for secrets used by Flask when running locally:
-<pre><code>SECRET_KEY=
+```
+SECRET_KEY=
 MY_EMAIL=
 # Cosmos secrets
 AZURE_ENDPOINT=
 AZURE_KEY=
 # ACS secrets
-ACS_CONNECTION_STRING=</code></pre>
-Create a local.settings.json file in the project root and set up env. variables. Used by Azure Functions Core Tools and deployed to Azure:
-<pre><code>{
+ACS_CONNECTION_STRING=
+```
+Create a local.settings.json file in the project root and set up env. variables.
+
+Used by Azure Functions Core Tools and deployed to Azure:
+```
+{
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "python",
@@ -114,34 +119,41 @@ Create a local.settings.json file in the project root and set up env. variables.
     "NAMESPACE_CONNECTION_STR": "",
     "QUEUE_NAME": ""
   }
-}</code></pre>
+}
+```
 
-<li><strong>Run the app</strong></li>
-<pre><code>python run.py</code></pre>
+5. **Run the app**
+```
+python run.py
+```
 Navigate to http://127.0.0.1:5000/
-</ol>
 
-<h2>☁️ Deploy to Azure</h2>
-<ol>
-<li><strong>Login to Azure</strong></li>
-<pre><code>az login</code></pre>
+## ☁️ Deploy to Azure
+1. **Login to Azure**
+```
+az login
+```
 
-<li><strong>Publish Function App</strong></li>
+2. **Publish Function App**
+
 Make sure your requirements.txt is up to date before deploying.
-<pre><code>func azure functionapp publish &lt;YourFunctionAppName&gt;</code></pre>
-</ol>
+```
+func azure functionapp publish &lt;YourFunctionAppName&gt;
+```
 
-<h2>🧪 Testing</h2>
+## 🧪 Testing
 This project demonstrates two approaches to mocking:
-<ul>
-    <li><strong>Hand-rolled fakes</strong> → used for Cosmos DB (cosmos_helpers) to clearly model NoSQL CRUD operations.</li>
-    <li><strong>unittest.mock</strong> → Used MagicMock for some tests and AsyncMock for Service Bus sender, showing industry-standard sync and async mocking.</li>
-</ul>
-Run tests:
-<pre><code>pytest -v</code></pre>
+- **Hand-rolled fakes** → used for Cosmos DB (cosmos_helpers) to clearly model NoSQL CRUD operations.
+- **unittest.mock** → Used MagicMock for some tests and AsyncMock for Service Bus sender, showing industry-standard sync and async mocking.
 
-<h2>📌 Example Unit Test (Cosmos DB Fake)</h2>
-<pre><code>def test_create_user(monkeypatch):
+Run tests:
+```
+pytest -v
+```
+
+## 📌 Example Unit Test (Cosmos DB Fake)
+```python
+def test_create_user(monkeypatch):
 
     # Track that user was created and zones updated
     created_items = []
@@ -184,10 +196,12 @@ Run tests:
     assert updated_zones == [
         {"id": "ABC123", "user_ids": [user_doc["id"]]},
         {"id": "DEF456", "user_ids": [user_doc["id"]]}
-    ]</code></pre>
+    ]
+```
 
-<h2>📌 Example Unit Test (Service Bus AsyncMock)</h2>
-<pre><code>@pytest.fixture
+## 📌 Example Unit Test (Service Bus AsyncMock)
+```python
+@pytest.fixture
 def mock_servicebus():
     
     # ServiceBusClient is synchronous → use MagicMock
@@ -222,28 +236,22 @@ async def test_send_messages_to_queue_calls_send_messages(mock_servicebus):
     await service_bus_sender.send_messages_to_queue(messages)
     
     # Ensure each message was sent
-    assert mock_sender.send_messages.call_count == len(messages)</code></pre>
+    assert mock_sender.send_messages.call_count == len(messages)
+```
 
-<h2>📝 Notes</h2>
-<ul>
-<li>The Service Bus sender uses async/await for high-throughput message publishing, while the rest of the app remains synchronous because Cosmos DB and NWS API clients are sync. This design balances performance with simplicity.</li>
-</ul>
+## 📝 Notes
+- The Service Bus sender uses async/await for high-throughput message publishing, while the rest of the app remains synchronous because Cosmos DB and NWS API clients are sync. This design balances performance with simplicity.
 
+## 📈 Future Improvements
+- Add user authentication (Flask-Login or Azure AD).
+- User dashboard with past alerts.
+- Dockerize the app for easier deployment.
+- CI/CD with GitHub Actions.
 
-<h2>📈 Future Improvements</h2>
-<ul>
-<li>Add user authentication (Flask-Login or Azure AD).</li>
-<li>User dashboard with past alerts.</li>
-<li>Dockerize the app for easier deployment.</li>
-<li>CI/CD with GitHub Actions.</li>
-</ul>
+## 👨‍💻 Author
+**Kevin Ferrucci**
+- [GitHub](https://github.com/kevinferrucci "GitHub")
+- [LinkedIn](https://www.linkedin.com/in/kevin-ferrucci/ "LinkedIn")
 
-<h2>👨‍💻 Author</h2>
-<strong>Kevin Ferrucci</strong>
-<ul>
-<li><a href="https://github.com/kevinferrucci">GitHub</a></li>
-<li><a href="https://www.linkedin.com/in/kevin-ferrucci/">LinkedIn</a></li>
-</ul>
-
-<h2>📄 License</h2>
-<p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
