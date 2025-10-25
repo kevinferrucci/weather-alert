@@ -1,8 +1,8 @@
 import json
 import logging
 import azure.functions as func
-from azfunc.alert_worker import get_alerts
-from azfunc.helpers.email_sender import format_email, send_email_via_acs
+from alert_worker import get_alerts
+from helpers.email_sender import format_email, send_email_via_acs
 
 app = func.FunctionApp()
 

@@ -3,7 +3,7 @@ import logging
 import asyncio
 from datetime import datetime, timezone
 from azure.cosmos.exceptions import CosmosResourceExistsError, CosmosHttpResponseError
-from azfunc.helpers import (
+from helpers import (
     get_zone_to_users,
     get_user_emails,
     alert_check,
