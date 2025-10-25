@@ -9,7 +9,6 @@ azure-servicebus==7.14.2
 # Flask app
 Flask==3.1.2
 Bootstrap-Flask==2.5.0
-Flask-Bootstrap==3.3.7.1
 Flask-WTF==1.2.2
 WTForms==3.2.1
 
