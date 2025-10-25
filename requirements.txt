@@ -16,9 +16,3 @@ WTForms==3.2.1
 python-dotenv==1.1.1
 requests==2.32.5
 
-# Application Insights
-opencensus-ext-azure
-opencensus-ext-flask
-opencensus-ext-logging
-opencensus-ext-requests
-
