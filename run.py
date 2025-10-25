@@ -9,12 +9,5 @@ app = create_app()
 
 FlaskInstrumentor().instrument_app(app)
 
-if "APPLICATIONINSIGHTS_CONNECTION_STRING" in os.environ:
-    provider = TracerProvider()
-    exporter = AzureMonitorTraceExporter.from_connection_string(
-        os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
-    )
-    provider.add_span_processor(BatchSpanProcessor(exporter))
-
 if __name__ == "__main__":
     app.run(debug=True)
