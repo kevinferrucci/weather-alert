@@ -3,7 +3,6 @@ from flask import Flask
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.azure.monitor.trace import AzureMonitorTraceExporter
 import os
 
 app = create_app()
