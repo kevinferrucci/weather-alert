@@ -42,6 +42,9 @@ weather-alert/
 │   ├── __init__.py
 │   ├── alert_worker.py
 │   ├── function_app.py          # Main app logic
+│   ├── host.json                # Azure Functions host config
+│   ├── local.settings.json      # Local-only secrets (gitignored, not deployed)
+│   ├── requirements.txt         # Dependencies for Azure
 │   └── helpers/
 │       ├── __init__.py
 │       ├── cosmos_helpers.py
@@ -60,8 +63,6 @@ weather-alert/
 │
 ├── function_app.py              # Stub entry point for Azure Functions (imports azfunc.function_app.app)
 ├── run.py                       # Flask dev runner (for local web UI)
-├── host.json                    # Azure Functions host config
-├── local.settings.json          # Local-only secrets (gitignored, not deployed)
 ├── .env                         # Local-only secrets (gitignored, not deployed)
 ├── .gitignore                   # GitHub ignore rules
 ├── .funcignore                  # Azure deployment ignore rules
